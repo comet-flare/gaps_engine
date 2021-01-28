@@ -1,9 +1,9 @@
 #include <gapspch.hpp>
+#include <Core/Engine/Engine.hpp>
 
 int32_t main()
 {
-	std::cout << "Hello GAPS world!";
+	std::cout << "GAPS Engine Entry Point reached!\n";
 
-	system("pause");
-	return 0;
+	return gaps::Engine().Start();
 }

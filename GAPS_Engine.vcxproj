@@ -153,6 +153,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Engine\Engine.cpp" />
+    <ClCompile Include="Core\System\Window.cpp" />
     <ClCompile Include="Extern\Include\glad\glad.cpp" />
     <ClCompile Include="gapspch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -161,6 +163,8 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Engine\Engine.hpp" />
+    <ClInclude Include="Core\System\Window.hpp" />
     <ClInclude Include="gapspch.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
