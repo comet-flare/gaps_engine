@@ -154,6 +154,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Core\Engine\Engine.cpp" />
+    <ClCompile Include="Core\Render\Renderer.cpp" />
     <ClCompile Include="Core\System\Window.cpp" />
     <ClCompile Include="Extern\Include\glad\glad.cpp" />
     <ClCompile Include="gapspch.cpp">
@@ -164,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Engine\Engine.hpp" />
+    <ClInclude Include="Core\Render\Renderer.hpp" />
     <ClInclude Include="Core\System\Window.hpp" />
     <ClInclude Include="gapspch.hpp" />
   </ItemGroup>
