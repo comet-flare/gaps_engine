@@ -153,6 +153,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Application\ApplicationLayer.cpp" />
     <ClCompile Include="Core\Engine\Engine.cpp" />
     <ClCompile Include="Core\Render\Renderer.cpp" />
     <ClCompile Include="Core\System\Window.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Application\ApplicationLayer.hpp" />
     <ClInclude Include="Core\Engine\Engine.hpp" />
     <ClInclude Include="Core\Render\Renderer.hpp" />
     <ClInclude Include="Core\System\Window.hpp" />

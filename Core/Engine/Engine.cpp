@@ -2,11 +2,13 @@
 #include <Core/Engine/Engine.hpp>
 #include <Core/System/Window.hpp>
 #include <Core/Render/Renderer.hpp>
+#include <Core/Application/ApplicationLayer.hpp>
 
 namespace gaps
 {
-	Engine::Engine()
+	Engine::Engine(ApplicationLayer* pApplicationLayer)
 		:
+		pApplicationLayer{ pApplicationLayer },
 		pWindow{ new Window() },
 		pRenderer{ new Renderer() }
 	{
@@ -17,6 +19,7 @@ namespace gaps
 	{
 		SAFE_RELEASE(pRenderer);
 		SAFE_RELEASE(pWindow);
+		SAFE_RELEASE(pApplicationLayer);
 	}
 
 	int32_t Engine::Start()
@@ -38,14 +41,18 @@ namespace gaps
 		}
 
 		pRenderer->Setup();
+		pApplicationLayer->Start();
 
 		while (!pWindow->ShouldClose())
 		{
 			pRenderer->ClearScreen();
 			pWindow->Update();
+			pApplicationLayer->Update(0.f);
+			pApplicationLayer->Render();
 			pWindow->SwapBuffers();
 		}
 
+		pApplicationLayer->Release();
 		pWindow->Destroy();
 
 		return EXIT_SUCCESS;
