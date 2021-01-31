@@ -45,9 +45,9 @@ namespace gaps
 		void OnRelease() override;
 
 	private:
-		virtual void Start() final;
-		virtual void Update(float deltaTime) final;
-		virtual void Render() final;
+		void Start();
+		void Update(float deltaTime);
+		void Render();
 
 		ApplicationLayerDescriptor desc;
 
