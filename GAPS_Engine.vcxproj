@@ -154,9 +154,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Core\Application\ApplicationLayer.cpp" />
+    <ClCompile Include="Core\Debugger\Debug.cpp" />
     <ClCompile Include="Core\Engine\Engine.cpp" />
     <ClCompile Include="Core\Render\Renderer.cpp" />
     <ClCompile Include="Core\System\Window.cpp" />
+    <ClCompile Include="Core\Time\TimeUtils.cpp" />
     <ClCompile Include="Extern\Include\glad\glad.cpp" />
     <ClCompile Include="gapspch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -166,9 +168,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Application\ApplicationLayer.hpp" />
+    <ClInclude Include="Core\Debugger\Debug.hpp" />
     <ClInclude Include="Core\Engine\Engine.hpp" />
     <ClInclude Include="Core\Render\Renderer.hpp" />
     <ClInclude Include="Core\System\Window.hpp" />
+    <ClInclude Include="Core\Time\TimeUtils.hpp" />
     <ClInclude Include="gapspch.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

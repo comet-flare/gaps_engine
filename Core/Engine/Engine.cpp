@@ -3,6 +3,9 @@
 #include <Core/System/Window.hpp>
 #include <Core/Render/Renderer.hpp>
 #include <Core/Application/ApplicationLayer.hpp>
+#include <Core/Debugger/Debug.hpp>
+
+MOD("Core.Engine");
 
 namespace gaps
 {
@@ -24,10 +27,14 @@ namespace gaps
 
 	int32_t Engine::Start()
 	{
+#ifdef _DEBUG
+		Debug::Enable();
+#endif
+
 		// Initialize GLFW Library
 		if (!glfwInit())
 		{
-			std::cout << "Failed to initialize GLFW library!\n";
+			DEBUG_CRIT("Failed to initialize GLFW library!");
 			return EXIT_FAILURE;
 		}
 
@@ -36,7 +43,7 @@ namespace gaps
 		// Initialize GLAD
 		if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress)))
 		{
-			std::cout << "Failed to initialize GLAD!\n";
+			DEBUG_CRIT("Failed to initialize GLAD!");
 			return EXIT_FAILURE;
 		}
 

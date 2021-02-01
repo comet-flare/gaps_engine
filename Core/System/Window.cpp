@@ -1,5 +1,8 @@
 #include <gapspch.hpp>
 #include <Core/System/Window.hpp>
+#include <Core/Debugger/Debug.hpp>
+
+MOD("Core.System.Window");
 
 namespace gaps
 {
@@ -26,7 +29,7 @@ namespace gaps
 
 		if (pInternal == nullptr)
 		{
-			std::cout << "Failed to open GLFW Window!\n";
+			DEBUG_CRIT("Failed to open GLFW Window!");
 			Destroy();
 			return EXIT_FAILURE;
 		}
