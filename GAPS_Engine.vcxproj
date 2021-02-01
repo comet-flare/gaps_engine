@@ -156,6 +156,7 @@
     <ClCompile Include="Core\Application\ApplicationLayer.cpp" />
     <ClCompile Include="Core\Debugger\Debug.cpp" />
     <ClCompile Include="Core\Engine\Engine.cpp" />
+    <ClCompile Include="Core\Render\Pipeline\VertexArray.cpp" />
     <ClCompile Include="Core\Render\Renderer.cpp" />
     <ClCompile Include="Core\System\Window.cpp" />
     <ClCompile Include="Core\Time\TimeUtils.cpp" />
@@ -170,6 +171,8 @@
     <ClInclude Include="Core\Application\ApplicationLayer.hpp" />
     <ClInclude Include="Core\Debugger\Debug.hpp" />
     <ClInclude Include="Core\Engine\Engine.hpp" />
+    <ClInclude Include="Core\Render\Pipeline\VertexArray.hpp" />
+    <ClInclude Include="Core\Render\Pipeline\VertexFormat.hpp" />
     <ClInclude Include="Core\Render\Renderer.hpp" />
     <ClInclude Include="Core\System\Window.hpp" />
     <ClInclude Include="Core\Time\TimeUtils.hpp" />
