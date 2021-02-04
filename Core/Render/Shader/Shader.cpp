@@ -64,7 +64,7 @@ namespace gaps
 		glAttachShader(programId, vertexId);
 		glAttachShader(programId, fragmentId);
 		glLinkProgram(programId);
-		CheckLinkErros();
+		CheckLinkErrors();
 
 		glDeleteShader(vertexId);
 		glDeleteShader(fragmentId);
@@ -148,7 +148,7 @@ namespace gaps
 		}
 	}
 
-	void Shader::CheckLinkErros()
+	void Shader::CheckLinkErrors()
 	{
 		int32_t success = 0;
 		char infoLog[1024];

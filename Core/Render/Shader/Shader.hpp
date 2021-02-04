@@ -25,7 +25,7 @@ namespace gaps
 
 	private:
 		void CheckCompileErrors(uint32_t shaderId, const std::string& type);
-		void CheckLinkErros();
+		void CheckLinkErrors();
 
 		uint32_t programId = 0u;
 	};
