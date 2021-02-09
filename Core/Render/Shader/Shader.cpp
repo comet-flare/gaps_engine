@@ -11,7 +11,7 @@ namespace gaps
 		glDeleteProgram(programId);
 	}
 
-	void Shader::Load(const char* vertexPath, const char* fragmentPath)
+	void Shader::Load(const std::string& vertexPath, const std::string& fragmentPath)
 	{
 		std::string vertexCode;
 		std::string fragmentCode;
@@ -24,8 +24,8 @@ namespace gaps
 
 		try
 		{
-			vertexShaderFile.open(vertexPath);
-			fragmentShaderFile.open(fragmentPath);
+			vertexShaderFile.open(DEFAULT_PATH + vertexPath);
+			fragmentShaderFile.open(DEFAULT_PATH + fragmentPath);
 
 			std::stringstream vertexShaderStream;
 			std::stringstream fragmentShaderStream;
