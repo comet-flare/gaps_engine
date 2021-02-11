@@ -6,6 +6,7 @@ namespace gaps
 	{
 		Position,
 		Color,
+		TexCoord,
 		Count
 	};
 

@@ -4,6 +4,7 @@
 
 namespace gaps
 {
+	class Texture;
 	class Shader;
 	class VertexArray;
 }
@@ -20,6 +21,8 @@ private:
 	void OnRender() override;
 	void OnRelease() override;
 
+	gaps::Texture* pBrickTexture = nullptr;
+	gaps::Texture* pGapsTexture = nullptr;
 	gaps::Shader* pShader = nullptr;
 	gaps::VertexArray* pVertexArray = nullptr;
 };
