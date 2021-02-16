@@ -4,5 +4,5 @@
 
 int32_t main()
 {
-	return gaps::Engine(new Game()).Start();
+	return gaps::Engine([]() -> gaps::ApplicationLayer* { return new Game(); }).Start();
 }

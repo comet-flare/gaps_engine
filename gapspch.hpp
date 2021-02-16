@@ -2,9 +2,12 @@
 
 #include <filesystem>
 #include <fstream>
+#include <future>
 #include <iostream>
-#include <unordered_map>
+#include <queue>
+#include <set>
 #include <sstream>
+#include <unordered_map>
 
 #include <glad/glad.hpp>
 #include <GLFW/glfw3.h>
@@ -15,3 +18,5 @@
 
 #define UNINITIALIZED Count
 #define FROM_DATA(DATA) (DATA), sizeof((DATA))
+
+typedef uint64_t id_t;

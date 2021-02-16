@@ -7,6 +7,13 @@ namespace gaps
 		:
 		desc{ std::move(desc) }
 	{
+		WindowHandler = BIND_EVENT(Renderer::HandleWindow);
+		StartListening();
+	}
+
+	Renderer::~Renderer()
+	{
+		StopListening();
 	}
 
 	void Renderer::Setup()
@@ -33,4 +40,17 @@ namespace gaps
 		return desc;
 	}
 
+	bool Renderer::HandleWindow(WindowEvent e)
+	{
+		switch (e.GetId())
+		{
+		case EventId::WindowSizeChange:
+			glViewport(0, 0, e.args.width, e.args.height);
+			break;
+		default:
+			break;
+		}
+
+		return false;
+	}
 }
