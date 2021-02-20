@@ -10,16 +10,14 @@ namespace gaps
 	class Engine final
 	{
 	public:
-		Engine(std::function<ApplicationLayer* ()> InitCallback);
-		~Engine();
+		static int32_t Run(std::function<ApplicationLayer* ()> InitCallback);
 
-		int32_t Start();
+		inline static Window* pWindow = nullptr;
+		inline static Renderer* pRenderer = nullptr;
+		inline static ApplicationLayer* pApplicationLayer = nullptr;
+		inline static EventDispatcher* pEventDispatcher = nullptr;
 
-		Window* pWindow = nullptr;
-		Renderer* pRenderer = nullptr;
-		ApplicationLayer* pApplicationLayer = nullptr;
-		EventDispatcher* pEventDispatcher = nullptr;
-
-		inline static Engine* pInstance = nullptr;
+	private:
+		static void Release();
 	};
 }

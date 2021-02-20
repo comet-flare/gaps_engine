@@ -9,7 +9,7 @@ namespace gaps
 	EventHandler::EventHandler(int32_t priority) noexcept
 		:
 		priority{ std::move(priority) },
-		pEventDispatcher{ Engine::pInstance->pEventDispatcher }
+		pEventDispatcher{ Engine::pEventDispatcher }
 	{
 	}
 

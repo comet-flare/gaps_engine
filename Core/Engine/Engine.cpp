@@ -11,25 +11,13 @@ MOD("Core.Engine");
 
 namespace gaps
 {
-	Engine::Engine(std::function<ApplicationLayer* ()> InitCallback)
+	int32_t Engine::Run(std::function<ApplicationLayer* ()> InitCallback)
 	{
-		pInstance = this;
 		pEventDispatcher = new EventDispatcher();
 		pWindow = new Window();
 		pRenderer = new Renderer();
 		pApplicationLayer = InitCallback();
-	}
 
-	Engine::~Engine()
-	{
-		SAFE_RELEASE(pApplicationLayer);
-		SAFE_RELEASE(pRenderer);
-		SAFE_RELEASE(pWindow);
-		SAFE_RELEASE(pEventDispatcher);
-	}
-
-	int32_t Engine::Start()
-	{
 #ifdef _DEBUG
 		Debug::Enable();
 #endif
@@ -38,6 +26,7 @@ namespace gaps
 		if (!glfwInit())
 		{
 			DEBUG_CRIT("Failed to initialize GLFW library!");
+			Release();
 			return EXIT_FAILURE;
 		}
 
@@ -47,6 +36,7 @@ namespace gaps
 		if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress)))
 		{
 			DEBUG_CRIT("Failed to initialize GLAD!");
+			Release();
 			return EXIT_FAILURE;
 		}
 
@@ -73,6 +63,15 @@ namespace gaps
 		pApplicationLayer->Release();
 		pWindow->Destroy();
 
+		Release();
 		return EXIT_SUCCESS;
+	}
+
+	void Engine::Release()
+	{
+		SAFE_RELEASE(pApplicationLayer);
+		SAFE_RELEASE(pRenderer);
+		SAFE_RELEASE(pWindow);
+		SAFE_RELEASE(pEventDispatcher);
 	}
 }

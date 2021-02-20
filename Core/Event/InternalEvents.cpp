@@ -12,6 +12,6 @@ namespace gaps
 
 	void InternalEvents::FrameBufferSizeCallback(GLFWwindow* pWindowHandle, int32_t width, int32_t height)
 	{
-		Engine::pInstance->pWindow->HandleResize(width, height);
+		Engine::pWindow->HandleResize(width, height);
 	}
 }

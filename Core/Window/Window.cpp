@@ -102,7 +102,7 @@ namespace gaps
 			sizeChangeEvent->args.width = e.args.width;
 			sizeChangeEvent->args.height = e.args.height;
 
-			Engine::pInstance->pEventDispatcher->DispatchEvent(std::move(sizeChangeEvent));
+			Engine::pEventDispatcher->DispatchEvent(std::move(sizeChangeEvent));
 			break;
 		}
 		default:
