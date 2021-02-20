@@ -11,12 +11,6 @@ namespace gaps
 		std::string title = "GAPS Engine";
 	};
 
-	struct WindowEventQueue final
-	{
-		std::queue<WindowEvent> queue;
-		std::mutex mutex;
-	};
-
 	class Window final
 	{
 	public:

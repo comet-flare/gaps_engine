@@ -20,4 +20,10 @@ namespace gaps
 
 		Window* pWindow = nullptr;
 	};
+
+	struct WindowEventQueue final
+	{
+		std::queue<WindowEvent> queue;
+		std::mutex mutex;
+	};
 }
