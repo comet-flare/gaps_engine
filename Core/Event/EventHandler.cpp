@@ -1,6 +1,8 @@
 #include <gapspch.hpp>
 #include <Core/Event/EventHandler.hpp>
 #include <Core/Event/EventDispatcher.hpp>
+#include <Core/Input/Keyboard/KeyboardEvent.hpp>
+#include <Core/Input/Mouse/MouseEvent.hpp>
 #include <Core/Window/WindowEvent.hpp>
 #include <Core/Engine/Engine.hpp>
 
@@ -53,6 +55,26 @@ namespace gaps
 		switch (pEvent->GetId())
 		{
 		case EventId::Undefined: break;
+		case EventId::KeyPress:
+		case EventId::KeyRelease:
+		{
+			if (KeyboardHandler != nullptr)
+			{
+				bRes = KeyboardHandler(*static_cast<KeyboardEvent*>(pEvent));
+			}
+			break;
+		}
+		case EventId::MouseButtonPress:
+		case EventId::MouseButtonRelease:
+		case EventId::MouseMotion:
+		case EventId::MouseScroll:
+		{
+			if (MouseHandler != nullptr)
+			{
+				bRes = MouseHandler(*static_cast<MouseEvent*>(pEvent));
+			}
+			break;
+		}
 		case EventId::WindowSizeChange:
 		{
 			if (WindowHandler != nullptr)

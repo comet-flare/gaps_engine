@@ -7,6 +7,8 @@
 namespace gaps
 {
 	class EventDispatcher;
+	class KeyboardEvent;
+	class MouseEvent;
 	class WindowEvent;
 
 	class IEventHandler
@@ -31,6 +33,8 @@ namespace gaps
 		void OnStopListening() override;
 		bool OnEventDispatch(Event* pEvent) override;
 
+		std::function<bool(KeyboardEvent)> KeyboardHandler = nullptr;
+		std::function<bool(MouseEvent)> MouseHandler = nullptr;
 		std::function<bool(WindowEvent)> WindowHandler = nullptr;
 
 	private:

@@ -4,6 +4,8 @@
 #include <Core/Render/Shader/Shader.hpp>
 #include <Core/Render/Pipeline/VertexArray.hpp>
 #include <Core/Render/Texture/Texture.hpp>
+#include <Core/Input/Input.hpp>
+#include <Core/Input/Keyboard/Keyboard.hpp>
 
 MOD("Game");
 
@@ -14,6 +16,8 @@ Game::Game()
 	pShader{ new gaps::Shader() },
 	pVertexArray{ new gaps::VertexArray() }
 {
+	KeyboardHandler = BIND_EVENT(Game::HandleKeyboard);
+	MouseHandler = BIND_EVENT(Game::HandleMouse);
 }
 
 Game::~Game()
@@ -22,6 +26,16 @@ Game::~Game()
 	SAFE_RELEASE(pShader);
 	SAFE_RELEASE(pGapsTexture);
 	SAFE_RELEASE(pBrickTexture);
+}
+
+void Game::OnEnable()
+{
+	StartListening();
+}
+
+void Game::OnDisable()
+{
+	StopListening();
 }
 
 void Game::OnStart()
@@ -68,6 +82,7 @@ void Game::OnStart()
 
 void Game::OnUpdate(float deltaTime)
 {
+	//std::cout << gaps::Input::pKeyboard->CharsDown();
 }
 
 void Game::OnRender()
@@ -83,4 +98,41 @@ void Game::OnRender()
 void Game::OnRelease()
 {
 	pVertexArray->Release();
+}
+
+bool Game::HandleKeyboard(gaps::KeyboardEvent e)
+{
+	std::cout << gaps::Input::pKeyboard->KeyToString(e.args.key);
+
+	return false;
+}
+
+bool Game::HandleMouse(gaps::MouseEvent e)
+{
+	switch (e.GetId())
+	{
+	case gaps::EventId::MouseButtonPress:
+	{
+		std::cout << "Button DOWN: " << (int)e.args.button << "\n";
+		break;
+	}
+	case gaps::EventId::MouseButtonRelease:
+	{
+		std::cout << "Button UP: " << (int)e.args.button << "\n";
+		break;
+	}
+	case gaps::EventId::MouseMotion:
+	{
+		std::cout << "x_position: " << e.args.xPosition << "; y_position: " << e.args.yPosition << "\n";
+		break;
+	}
+	case gaps::EventId::MouseScroll:
+	{
+		std::cout << "x_scroll: " << e.args.xScroll << "; y_scroll: " << e.args.yScroll << "\n";
+		break;
+	}
+	default: break;
+	}
+
+	return false;
 }

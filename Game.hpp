@@ -1,6 +1,9 @@
 #pragma once
 
 #include <Core/Application/ApplicationLayer.hpp>
+#include <Core/Event/EventHandler.hpp>
+#include <Core/Input/Keyboard/KeyboardEvent.hpp>
+#include <Core/Input/Mouse/MouseEvent.hpp>
 
 namespace gaps
 {
@@ -9,17 +12,22 @@ namespace gaps
 	class VertexArray;
 }
 
-class Game final : public gaps::ApplicationLayer
+class Game final : public gaps::ApplicationLayer, public gaps::EventHandler
 {
 public:
 	Game();
 	~Game();
 
 private:
+	void OnEnable() override;
+	void OnDisable() override;
 	void OnStart() override;
 	void OnUpdate(float deltaTime) override;
 	void OnRender() override;
 	void OnRelease() override;
+
+	bool HandleKeyboard(gaps::KeyboardEvent e);
+	bool HandleMouse(gaps::MouseEvent e);
 
 	gaps::Texture* pBrickTexture = nullptr;
 	gaps::Texture* pGapsTexture = nullptr;

@@ -6,6 +6,7 @@
 #include <Core/Debugger/Debug.hpp>
 #include <Core/Event/EventDispatcher.hpp>
 #include <Core/Event/InternalEvents.hpp>
+#include <Core/Input/Input.hpp>
 
 MOD("Core.Engine");
 
@@ -41,6 +42,7 @@ namespace gaps
 		}
 
 		InternalEvents::Register(pWindow->pInternal);
+		Input::RegisterDevices();
 
 		pRenderer->Setup();
 		pApplicationLayer->Start();
@@ -49,6 +51,7 @@ namespace gaps
 		{
 			// First Stage
 			pEventDispatcher->DispatchEvents();
+			Input::Update();
 			pWindow->Update();
 
 			// Second Stage
@@ -60,15 +63,16 @@ namespace gaps
 			pWindow->SwapBuffers();
 		}
 
-		pApplicationLayer->Release();
-		pWindow->Destroy();
-
 		Release();
 		return EXIT_SUCCESS;
 	}
 
 	void Engine::Release()
 	{
+		pApplicationLayer->Release();
+		Input::ReleaseDevices();
+		pWindow->Destroy();
+
 		SAFE_RELEASE(pApplicationLayer);
 		SAFE_RELEASE(pRenderer);
 		SAFE_RELEASE(pWindow);

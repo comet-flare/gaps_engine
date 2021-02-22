@@ -5,6 +5,18 @@ namespace gaps
 	enum class EventId : id_t
 	{
 		Undefined,
+
+		// Keyboard Events
+		KeyPress,
+		KeyRelease,
+
+		// Mouse Events
+		MouseButtonPress,
+		MouseButtonRelease,
+		MouseMotion,
+		MouseScroll,
+
+		// Window Events
 		WindowSizeChange
 	};
 

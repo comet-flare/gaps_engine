@@ -160,6 +160,12 @@
     <ClCompile Include="Core\Event\EventDispatcher.cpp" />
     <ClCompile Include="Core\Event\EventHandler.cpp" />
     <ClCompile Include="Core\Event\InternalEvents.cpp" />
+    <ClCompile Include="Core\Input\Input.cpp" />
+    <ClCompile Include="Core\Input\InputEvent.cpp" />
+    <ClCompile Include="Core\Input\Keyboard\Keyboard.cpp" />
+    <ClCompile Include="Core\Input\Keyboard\KeyboardEvent.cpp" />
+    <ClCompile Include="Core\Input\Mouse\Mouse.cpp" />
+    <ClCompile Include="Core\Input\Mouse\MouseEvent.cpp" />
     <ClCompile Include="Core\Render\Pipeline\VertexArray.cpp" />
     <ClCompile Include="Core\Render\Renderer.cpp" />
     <ClCompile Include="Core\Render\Shader\Shader.cpp" />
@@ -183,6 +189,14 @@
     <ClInclude Include="Core\Event\EventDispatcher.hpp" />
     <ClInclude Include="Core\Event\EventHandler.hpp" />
     <ClInclude Include="Core\Event\InternalEvents.hpp" />
+    <ClInclude Include="Core\Input\Input.hpp" />
+    <ClInclude Include="Core\Input\InputEvent.hpp" />
+    <ClInclude Include="Core\Input\Keyboard\Keyboard.hpp" />
+    <ClInclude Include="Core\Input\Keyboard\KeyboardEvent.hpp" />
+    <ClInclude Include="Core\Input\Keyboard\KeyCode.hpp" />
+    <ClInclude Include="Core\Input\Mouse\Mouse.hpp" />
+    <ClInclude Include="Core\Input\Mouse\MouseButton.hpp" />
+    <ClInclude Include="Core\Input\Mouse\MouseEvent.hpp" />
     <ClInclude Include="Core\Render\Pipeline\VertexArray.hpp" />
     <ClInclude Include="Core\Render\Pipeline\VertexFormat.hpp" />
     <ClInclude Include="Core\Render\Renderer.hpp" />
