@@ -6,6 +6,7 @@
 #include <Core/Render/Texture/Texture.hpp>
 #include <Core/Input/Input.hpp>
 #include <Core/Input/Keyboard/Keyboard.hpp>
+#include <Core/Engine/Engine.hpp>
 
 MOD("Game");
 
@@ -16,8 +17,9 @@ Game::Game()
 	pShader{ new gaps::Shader() },
 	pVertexArray{ new gaps::VertexArray() }
 {
-	KeyboardHandler = BIND_EVENT(Game::HandleKeyboard);
-	MouseHandler = BIND_EVENT(Game::HandleMouse);
+	TickHandler = BIND_EVENT(Game::Tick);
+	//KeyboardHandler = BIND_EVENT(Game::HandleKeyboard);
+	//MouseHandler = BIND_EVENT(Game::HandleMouse);
 }
 
 Game::~Game()
@@ -98,6 +100,14 @@ void Game::OnRender()
 void Game::OnRelease()
 {
 	pVertexArray->Release();
+}
+
+bool Game::Tick(gaps::TickEvent e)
+{
+	std::cout << "DeltaTime: " << e.args.deltaTime
+		<< "; ElapsedSeconds: " << gaps::Engine::GetElapsedSeconds() << "\n";
+
+	return false;
 }
 
 bool Game::HandleKeyboard(gaps::KeyboardEvent e)

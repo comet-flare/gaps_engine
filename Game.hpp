@@ -4,6 +4,7 @@
 #include <Core/Event/EventHandler.hpp>
 #include <Core/Input/Keyboard/KeyboardEvent.hpp>
 #include <Core/Input/Mouse/MouseEvent.hpp>
+#include <Core/Time/TickEvent.hpp>
 
 namespace gaps
 {
@@ -26,6 +27,7 @@ private:
 	void OnRender() override;
 	void OnRelease() override;
 
+	bool Tick(gaps::TickEvent e);
 	bool HandleKeyboard(gaps::KeyboardEvent e);
 	bool HandleMouse(gaps::MouseEvent e);
 

@@ -6,6 +6,9 @@ namespace gaps
 	{
 		Undefined,
 
+		// Process Events
+		Tick,
+
 		// Keyboard Events
 		KeyPress,
 		KeyRelease,

@@ -1,6 +1,7 @@
 #include <gapspch.hpp>
 #include <Core/Event/EventHandler.hpp>
 #include <Core/Event/EventDispatcher.hpp>
+#include <Core/Time/TickEvent.hpp>
 #include <Core/Input/Keyboard/KeyboardEvent.hpp>
 #include <Core/Input/Mouse/MouseEvent.hpp>
 #include <Core/Window/WindowEvent.hpp>
@@ -80,6 +81,14 @@ namespace gaps
 			if (WindowHandler != nullptr)
 			{
 				bRes = WindowHandler(*static_cast<WindowEvent*>(pEvent));
+			}
+			break;
+		}
+		case EventId::Tick:
+		{
+			if (TickHandler != nullptr)
+			{
+				bRes = TickHandler(*static_cast<TickEvent*>(pEvent));
 			}
 			break;
 		}

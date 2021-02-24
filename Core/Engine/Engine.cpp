@@ -7,6 +7,7 @@
 #include <Core/Event/EventDispatcher.hpp>
 #include <Core/Event/InternalEvents.hpp>
 #include <Core/Input/Input.hpp>
+#include <Core/Time/TickEvent.hpp>
 
 MOD("Core.Engine");
 
@@ -49,15 +50,8 @@ namespace gaps
 
 		while (!pWindow->ShouldClose())
 		{
-			// First Stage
-			pEventDispatcher->DispatchEvents();
-			Input::Update();
-			pWindow->Update();
+			Update();
 
-			// Second Stage
-			pApplicationLayer->Update(0.f);
-
-			// Third Stage
 			pRenderer->ClearScreen();
 			pApplicationLayer->Render();
 			pWindow->SwapBuffers();
@@ -65,6 +59,44 @@ namespace gaps
 
 		Release();
 		return EXIT_SUCCESS;
+	}
+
+	float Engine::GetElapsedSeconds()
+	{
+		return glfwGetTime();
+	}
+
+	void Engine::Update()
+	{
+		using namespace std::chrono;
+
+		pEventDispatcher->DispatchEvents();
+
+		const steady_clock::time_point currentTime = steady_clock::now();
+		duration<int64_t, std::nano> diff = currentTime - previousTime;
+
+		static const float MIN_FPS = 24.f;
+		static const float MAX_FPS = 60.f;
+
+		if (diff > microseconds(static_cast<int64_t>(1000000.f / MIN_FPS)))
+		{
+			if (const auto newDiff = milliseconds(static_cast<int64_t>(1000.f / MAX_FPS)); diff > newDiff)
+			{
+				diff = newDiff;
+			}
+
+			previousTime = currentTime;
+			const float deltaTime = duration_cast<microseconds>(diff).count() / 1000000.f;
+
+			pApplicationLayer->Update(deltaTime);
+
+			auto pTickEvent = std::make_unique<TickEvent>(EventId::Tick);
+			pTickEvent->args.deltaTime = deltaTime;
+			pEventDispatcher->DispatchEvent(std::move(pTickEvent));
+		}
+
+		Input::Update();
+		pWindow->Update();
 	}
 
 	void Engine::Release()
