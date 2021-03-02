@@ -75,12 +75,9 @@ namespace gaps
 		const steady_clock::time_point currentTime = steady_clock::now();
 		duration<int64_t, std::nano> diff = currentTime - previousTime;
 
-		static const float MIN_FPS = 24.f;
-		static const float MAX_FPS = 60.f;
-
-		if (diff > microseconds(static_cast<int64_t>(1000000.f / MIN_FPS)))
+		if (diff > std::chrono::milliseconds(1))
 		{
-			if (const auto newDiff = milliseconds(static_cast<int64_t>(1000.f / MAX_FPS)); diff > newDiff)
+			if (const auto newDiff = milliseconds(static_cast<int64_t>(1000.f / 24.f)); diff > newDiff)
 			{
 				diff = newDiff;
 			}
