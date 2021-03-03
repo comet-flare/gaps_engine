@@ -17,7 +17,7 @@ Game::Game()
 	pShader{ new gaps::Shader() },
 	pVertexArray{ new gaps::VertexArray() }
 {
-	TickHandler = BIND_EVENT(Game::Tick);
+	//TickHandler = BIND_EVENT(Game::Tick);
 	//KeyboardHandler = BIND_EVENT(Game::HandleKeyboard);
 	//MouseHandler = BIND_EVENT(Game::HandleMouse);
 }
@@ -46,17 +46,48 @@ void Game::OnStart()
 
 	float vertices[] =
 	{
-		// position          // color              // tex coords
-		 0.5f,  0.5f, 0.f,   1.f, 1.f, 1.f, 1.f,   1.f, 1.f, // top right
-		 0.5f, -0.5f, 0.f,   1.f, 1.f, 1.f, 1.f,   1.f, 0.f, // bottom right
-		-0.5f, -0.5f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, // bottom left
-		-0.5f,  0.5f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 1.f  // top left
-	};
+		// position             // color               // tex coords
+		-0.5f, -0.5f, -0.5f,    1.f, 1.f, 1.f, 1.f,    0.0f, 0.0f,
+		 0.5f, -0.5f, -0.5f,    1.f, 1.f, 1.f, 1.f,    1.0f, 0.0f,
+		 0.5f,  0.5f, -0.5f,    1.f, 1.f, 1.f, 1.f,    1.0f, 1.0f,
+		 0.5f,  0.5f, -0.5f,    1.f, 1.f, 1.f, 1.f,    1.0f, 1.0f,
+		-0.5f,  0.5f, -0.5f,    1.f, 1.f, 1.f, 1.f,    0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,    1.f, 1.f, 1.f, 1.f,    0.0f, 0.0f,
 
-	uint32_t indices[] =
-	{
-		0, 1, 3, // first triangle
-		1, 2, 3  // second triangle
+		-0.5f, -0.5f,  0.5f,    1.f, 1.f, 1.f, 1.f,    0.0f, 0.0f,
+		 0.5f, -0.5f,  0.5f,    1.f, 1.f, 1.f, 1.f,    1.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,    1.f, 1.f, 1.f, 1.f,    1.0f, 1.0f,
+		 0.5f,  0.5f,  0.5f,    1.f, 1.f, 1.f, 1.f,    1.0f, 1.0f,
+		-0.5f,  0.5f,  0.5f,    1.f, 1.f, 1.f, 1.f,    0.0f, 1.0f,
+		-0.5f, -0.5f,  0.5f,    1.f, 1.f, 1.f, 1.f,    0.0f, 0.0f,
+
+		-0.5f,  0.5f,  0.5f,    1.f, 1.f, 1.f, 1.f,    1.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f,    1.f, 1.f, 1.f, 1.f,    1.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,    1.f, 1.f, 1.f, 1.f,    0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,    1.f, 1.f, 1.f, 1.f,    0.0f, 1.0f,
+		-0.5f, -0.5f,  0.5f,    1.f, 1.f, 1.f, 1.f,    0.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f,    1.f, 1.f, 1.f, 1.f,    1.0f, 0.0f,
+
+		 0.5f,  0.5f,  0.5f,    1.f, 1.f, 1.f, 1.f,    1.0f, 0.0f,
+		 0.5f,  0.5f, -0.5f,    1.f, 1.f, 1.f, 1.f,    1.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,    1.f, 1.f, 1.f, 1.f,    0.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,    1.f, 1.f, 1.f, 1.f,    0.0f, 1.0f,
+		 0.5f, -0.5f,  0.5f,    1.f, 1.f, 1.f, 1.f,    0.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,    1.f, 1.f, 1.f, 1.f,    1.0f, 0.0f,
+
+		-0.5f, -0.5f, -0.5f,    1.f, 1.f, 1.f, 1.f,    0.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,    1.f, 1.f, 1.f, 1.f,    1.0f, 1.0f,
+		 0.5f, -0.5f,  0.5f,    1.f, 1.f, 1.f, 1.f,    1.0f, 0.0f,
+		 0.5f, -0.5f,  0.5f,    1.f, 1.f, 1.f, 1.f,    1.0f, 0.0f,
+		-0.5f, -0.5f,  0.5f,    1.f, 1.f, 1.f, 1.f,    0.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f,    1.f, 1.f, 1.f, 1.f,    0.0f, 1.0f,
+
+		-0.5f,  0.5f, -0.5f,    1.f, 1.f, 1.f, 1.f,    0.0f, 1.0f,
+		 0.5f,  0.5f, -0.5f,    1.f, 1.f, 1.f, 1.f,    1.0f, 1.0f,
+		 0.5f,  0.5f,  0.5f,    1.f, 1.f, 1.f, 1.f,    1.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,    1.f, 1.f, 1.f, 1.f,    1.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f,    1.f, 1.f, 1.f, 1.f,    0.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f,    1.f, 1.f, 1.f, 1.f,    0.0f, 1.0f
 	};
 
 	gaps::VertexLayoutMap vertexLayoutMap =
@@ -67,7 +98,6 @@ void Game::OnStart()
 	};
 
 	pVertexArray->SetVertexBufferData(FROM_DATA(vertices), vertexLayoutMap);
-	pVertexArray->SetIndexBufferData(FROM_DATA(indices));
 	pVertexArray->Submit();
 
 	pBrickTexture->Load("brick.png");
@@ -84,7 +114,13 @@ void Game::OnStart()
 
 void Game::OnUpdate(float deltaTime)
 {
-	//std::cout << gaps::Input::pKeyboard->CharsDown();
+	glm::mat4 transform = glm::mat4(1.0f);
+	transform = glm::translate(transform, glm::vec3(0.5f, 0.5f, 0.0f));
+	transform = glm::rotate(transform, 0.f, glm::vec3(1.0f, 0.0f, 0.0f));
+	transform = glm::rotate(transform, gaps::Engine::GetElapsedSeconds(), glm::vec3(0.0f, 1.0f, 0.0f));
+	transform = glm::rotate(transform, gaps::Engine::GetElapsedSeconds(), glm::vec3(0.0f, 0.0f, 1.0f));
+	transform = glm::scale(transform, glm::vec3(0.5, 0.5, 0.5));
+	pShader->SetUniform("uTransform", transform);
 }
 
 void Game::OnRender()
