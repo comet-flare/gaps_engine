@@ -4,6 +4,9 @@ namespace gaps
 {
 	class IApplicationLayer
 	{
+	public:
+		virtual ~IApplicationLayer() = default;
+
 	protected:
 		virtual void OnStart() = 0;
 		virtual void OnEnable() = 0;
@@ -24,7 +27,7 @@ namespace gaps
 	class ApplicationLayer : public IApplicationLayer
 	{
 	public:
-		explicit ApplicationLayer(ApplicationLayerDescriptor desc = {}) noexcept;
+		explicit ApplicationLayer(const ApplicationLayerDescriptor& desc = {}) noexcept;
 
 		virtual void Enable() final;
 		virtual void Disable() final;
@@ -45,9 +48,9 @@ namespace gaps
 		void OnRelease() override;
 
 	private:
-		void Start();
-		void Update(float deltaTime);
-		void Render();
+		virtual void Start() final;
+		virtual void Update(float deltaTime) final;
+		virtual void Render() final;
 
 		ApplicationLayerDescriptor desc;
 

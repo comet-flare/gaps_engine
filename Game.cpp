@@ -1,9 +1,9 @@
 #include <gapspch.hpp>
 #include <Game.hpp>
 #include <Core/Debugger/Debug.hpp>
-#include <Core/Render/Shader/Shader.hpp>
+#include <Core/Render/Shader.hpp>
 #include <Core/Render/Pipeline/VertexArray.hpp>
-#include <Core/Render/Texture/Texture.hpp>
+#include <Core/Render/Texture.hpp>
 #include <Core/Input/Input.hpp>
 #include <Core/Input/Keyboard/Keyboard.hpp>
 #include <Core/Engine/Engine.hpp>

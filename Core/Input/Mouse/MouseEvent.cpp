@@ -6,9 +6,9 @@ MOD("Core.Input.Mouse.Event");
 
 namespace gaps
 {
-    MouseEvent::MouseEvent(EventId id) noexcept
+    MouseEvent::MouseEvent(const EventId id) noexcept
         :
-        InputEvent{ std::move(id) }
+        InputEvent{ id }
     {
         switch (id)
         {
@@ -18,7 +18,7 @@ namespace gaps
         case gaps::EventId::MouseMotion:
             break;
         default:
-            id = EventId::Undefined;
+            this->id = EventId::Undefined;
             DEBUG_WARN("EventId is not from MouseEvent family. It will be set to Undefined!");
             break;
         }

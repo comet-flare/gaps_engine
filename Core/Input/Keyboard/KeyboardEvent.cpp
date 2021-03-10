@@ -6,9 +6,9 @@ MOD("Core.Input.Keyboard.Event");
 
 namespace gaps
 {
-    KeyboardEvent::KeyboardEvent(EventId id) noexcept
+    KeyboardEvent::KeyboardEvent(const EventId id) noexcept
         :
-        InputEvent{ std::move(id) }
+        InputEvent{ id }
     {
         switch (id)
         {
@@ -16,7 +16,7 @@ namespace gaps
         case gaps::EventId::KeyRelease:
             break;
         default:
-            id = EventId::Undefined;
+            this->id = EventId::Undefined;
             DEBUG_WARN("EventId is not from KeyboardEvent family. It will be set to Undefined!");
             break;
         }

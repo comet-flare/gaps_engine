@@ -12,16 +12,16 @@ namespace gaps
 	{
 	}
 
-	WindowEvent::WindowEvent(EventId id) noexcept
+	WindowEvent::WindowEvent(const EventId id) noexcept
 		:
-		Event{ std::move(id) }
+		Event{ id }
 	{
 		switch (id)
 		{
 		case gaps::EventId::WindowSizeChange:
 			break;
 		default:
-			id = EventId::Undefined;
+			this->id = EventId::Undefined;
 			DEBUG_WARN("EventId is not from WindowEvent family. It will be set to Undefined!");
 			break;
 		}

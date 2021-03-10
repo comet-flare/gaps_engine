@@ -5,7 +5,7 @@ namespace gaps
 {
 	std::string TimeUtils::GetCurrentTimeAndDate()
 	{
-		time_t t0 = time(0);
+		time_t t0 = time(nullptr);
 		char str[26];
 		ctime_s(str, sizeof(str), &t0);
 		std::string res = std::string(str);

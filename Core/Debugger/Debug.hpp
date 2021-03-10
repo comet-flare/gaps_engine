@@ -21,7 +21,7 @@ namespace gaps
 		inline static bool bDisableWriteToFile = false;
 
 	private:
-		static void WriteText(std::string text);
+		static void WriteText(const std::string& text);
 
 		inline static std::string enableStartTime = "";
 		inline static bool bEnabled = false;

@@ -14,6 +14,9 @@ namespace gaps
 
 	class IEventHandler
 	{
+	public:
+		virtual ~IEventHandler() = default;
+
 	protected:
 		virtual void OnStartListening() = 0;
 		virtual void OnStopListening() = 0;
@@ -24,7 +27,7 @@ namespace gaps
 	{
 	public:
 		explicit EventHandler(int32_t priority = 0) noexcept;
-		~EventHandler();
+		~EventHandler() override;
 
 		virtual void StartListening() final;
 		virtual void StopListening() final;

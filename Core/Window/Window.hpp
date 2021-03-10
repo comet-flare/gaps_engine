@@ -26,8 +26,8 @@ namespace gaps
 		const WindowDescriptor& GetDescriptor() const noexcept;
 
 	private:
-		void SubscribeEvent(WindowEvent e);
-		void HandleEvent(WindowEvent e);
+		void SubscribeEvent(const WindowEvent& e);
+		void HandleEvent(const WindowEvent& e);
 		void HandleResize(int32_t width, int32_t height);
 
 		WindowDescriptor desc;

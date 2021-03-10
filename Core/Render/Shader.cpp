@@ -1,5 +1,5 @@
 #include <gapspch.hpp>
-#include <Core/Render/Shader/Shader.hpp>
+#include <Core/Render/Shader.hpp>
 #include <Core/Debugger/Debug.hpp>
 
 MOD("Core.Render.Shader");
@@ -135,7 +135,7 @@ namespace gaps
 		glUniformMatrix4fv(glGetUniformLocation(programId, name.c_str()), 1, GL_FALSE, &m[0][0]);
 	}
 
-	void Shader::CheckCompileErrors(uint32_t shaderId, const std::string& type)
+	void Shader::CheckCompileErrors(uint32_t shaderId, const std::string& type) const
 	{
 		int32_t success = 0;
 		char infoLog[1024];
@@ -148,7 +148,7 @@ namespace gaps
 		}
 	}
 
-	void Shader::CheckLinkErrors()
+	void Shader::CheckLinkErrors() const
 	{
 		int32_t success = 0;
 		char infoLog[1024];

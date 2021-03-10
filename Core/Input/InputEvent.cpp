@@ -9,9 +9,9 @@ namespace gaps
 	{
 	}
 
-	InputEvent::InputEvent(EventId id) noexcept
+	InputEvent::InputEvent(const EventId id) noexcept
 		:
-		Event{ std::move(id) }
+		Event{ id }
 	{
 	}
 }

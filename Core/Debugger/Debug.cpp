@@ -90,7 +90,7 @@ namespace gaps
 		return bEnabled;
 	}
 
-	void Debug::WriteText(std::string text)
+	void Debug::WriteText(const std::string& text)
 	{
 		if (!bDisableWriteToConsole)
 		{

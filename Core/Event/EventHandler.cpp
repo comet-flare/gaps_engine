@@ -9,9 +9,9 @@
 
 namespace gaps
 {
-	EventHandler::EventHandler(int32_t priority) noexcept
+	EventHandler::EventHandler(const int32_t priority) noexcept
 		:
-		priority{ std::move(priority) },
+		priority{ priority },
 		pEventDispatcher{ Engine::pEventDispatcher }
 	{
 	}
@@ -61,7 +61,7 @@ namespace gaps
 		{
 			if (KeyboardHandler != nullptr)
 			{
-				bRes = KeyboardHandler(*static_cast<KeyboardEvent*>(pEvent));
+				bRes = KeyboardHandler(*dynamic_cast<KeyboardEvent*>(pEvent));
 			}
 			break;
 		}
@@ -72,7 +72,7 @@ namespace gaps
 		{
 			if (MouseHandler != nullptr)
 			{
-				bRes = MouseHandler(*static_cast<MouseEvent*>(pEvent));
+				bRes = MouseHandler(*dynamic_cast<MouseEvent*>(pEvent));
 			}
 			break;
 		}
@@ -80,7 +80,7 @@ namespace gaps
 		{
 			if (WindowHandler != nullptr)
 			{
-				bRes = WindowHandler(*static_cast<WindowEvent*>(pEvent));
+				bRes = WindowHandler(*dynamic_cast<WindowEvent*>(pEvent));
 			}
 			break;
 		}
@@ -88,7 +88,7 @@ namespace gaps
 		{
 			if (TickHandler != nullptr)
 			{
-				bRes = TickHandler(*static_cast<TickEvent*>(pEvent));
+				bRes = TickHandler(*dynamic_cast<TickEvent*>(pEvent));
 			}
 			break;
 		}

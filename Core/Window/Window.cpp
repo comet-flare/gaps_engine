@@ -22,8 +22,8 @@ namespace gaps
 
 		pInternal = glfwCreateWindow
 		(
-			desc.width,
-			desc.height,
+			static_cast<int32_t>(desc.width),
+			static_cast<int32_t>(desc.height),
 			desc.title.c_str(),
 			nullptr,
 			nullptr
@@ -82,13 +82,13 @@ namespace gaps
 		return desc;
 	}
 
-	void Window::SubscribeEvent(WindowEvent e)
+	void Window::SubscribeEvent(const WindowEvent& e)
 	{
 		std::lock_guard<std::mutex> lock{ windowEventQueue.mutex };
 		windowEventQueue.queue.push(e);
 	}
 
-	void Window::HandleEvent(WindowEvent e)
+	void Window::HandleEvent(const WindowEvent& e)
 	{
 		switch (e.GetId())
 		{

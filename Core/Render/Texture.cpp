@@ -1,5 +1,5 @@
 #include <gapspch.hpp>
-#include <Core/Render/Texture/Texture.hpp>
+#include <Core/Render/Texture.hpp>
 #include <Core/Debugger/Debug.hpp>
 
 #define STB_IMAGE_IMPLEMENTATION
@@ -9,9 +9,9 @@ MOD("Core.Render.Texture");
 
 namespace gaps
 {
-	Texture::Texture(TextureDescriptor desc) noexcept
+	Texture::Texture(const TextureDescriptor& desc) noexcept
 		:
-		desc{ std::move(desc) }
+		desc{ desc }
 	{
 	}
 
@@ -56,7 +56,10 @@ namespace gaps
 			}
 		}
 
+		desc.width = static_cast<uint32_t>(width);
+		desc.height = static_cast<uint32_t>(height);
 		bLoaded = true;
+		return true;
 	}
 
 	void Texture::Bind(uint32_t location)

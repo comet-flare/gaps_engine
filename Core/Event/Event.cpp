@@ -8,9 +8,9 @@ namespace gaps
 		return id;
 	}
 
-	Event::Event(EventId id) noexcept
+	Event::Event(const EventId id) noexcept
 		:
-		id{ std::move(id) }
+		id{ id }
 	{
 	}
 

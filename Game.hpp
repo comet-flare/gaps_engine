@@ -17,7 +17,7 @@ class Game final : public gaps::ApplicationLayer, public gaps::EventHandler
 {
 public:
 	Game();
-	~Game();
+	~Game() override;
 
 private:
 	void OnEnable() override;

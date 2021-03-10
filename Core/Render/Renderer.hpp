@@ -13,8 +13,8 @@ namespace gaps
 	class Renderer final : public EventHandler
 	{
 	public:
-		explicit Renderer(RendererDescriptor desc = {}) noexcept;
-		~Renderer();
+		explicit Renderer(const RendererDescriptor& desc = {}) noexcept;
+		~Renderer() override;
 
 		void Setup();
 		void ClearScreen();
@@ -22,7 +22,7 @@ namespace gaps
 		const RendererDescriptor& GetRendererDescriptor() const noexcept;
 
 	private:
-		bool HandleWindow(WindowEvent e);
+		bool HandleWindow(const WindowEvent& e);
 
 		RendererDescriptor desc;
 	};

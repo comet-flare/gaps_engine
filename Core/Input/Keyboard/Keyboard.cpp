@@ -13,7 +13,7 @@ namespace gaps
 
     std::string Keyboard::CharsDown()
     {
-        std::string res = "";
+        std::string res;
 
         static KeyCode printableKeys[] =
         {

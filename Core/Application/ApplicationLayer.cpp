@@ -3,9 +3,9 @@
 
 namespace gaps
 {
-	ApplicationLayer::ApplicationLayer(ApplicationLayerDescriptor desc) noexcept
+	ApplicationLayer::ApplicationLayer(const ApplicationLayerDescriptor& desc) noexcept
 		:
-		desc{ std::move(desc) }
+		desc{ desc }
 	{
 	}
 

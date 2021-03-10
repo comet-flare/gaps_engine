@@ -42,13 +42,13 @@
     <ClCompile Include="Core\Render\Pipeline\VertexArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Render\Shader\Shader.cpp">
+    <ClCompile Include="Core\Render\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Render\Texture\Texture.cpp">
+    <ClCompile Include="Core\Render\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Event\Event.cpp">
@@ -116,13 +116,13 @@
     <ClInclude Include="Core\Render\Pipeline\VertexFormat.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Render\Shader\Shader.hpp">
+    <ClInclude Include="Core\Render\Shader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Render\Texture\Texture.hpp">
+    <ClInclude Include="Core\Render\Texture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Event\Event.hpp">

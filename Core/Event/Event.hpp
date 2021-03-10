@@ -25,6 +25,9 @@ namespace gaps
 
 	class IEvent
 	{
+	public:
+		virtual ~IEvent() = default;
+
 	protected:
 		virtual void OnCreate() = 0;
 		virtual void OnRelease() = 0;
@@ -33,17 +36,14 @@ namespace gaps
 	class Event : public IEvent
 	{
 	public:
-		virtual ~Event() = default;
-
 		EventId GetId() const noexcept;
 
 	protected:
-		Event(EventId id) noexcept;
+		explicit Event(EventId id) noexcept;
 
 		void OnCreate() override;
 		void OnRelease() override;
 
-	private:
 		EventId id = EventId::Undefined;
 	};
 

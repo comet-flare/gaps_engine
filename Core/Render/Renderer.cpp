@@ -3,9 +3,9 @@
 
 namespace gaps
 {
-	Renderer::Renderer(RendererDescriptor desc) noexcept
+	Renderer::Renderer(const RendererDescriptor& desc) noexcept
 		:
-		desc{ std::move(desc) }
+		desc{ desc }
 	{
 		WindowHandler = BIND_EVENT(Renderer::HandleWindow);
 		StartListening();
@@ -40,12 +40,18 @@ namespace gaps
 		return desc;
 	}
 
-	bool Renderer::HandleWindow(WindowEvent e)
+	bool Renderer::HandleWindow(const WindowEvent& e)
 	{
 		switch (e.GetId())
 		{
 		case EventId::WindowSizeChange:
-			glViewport(0, 0, e.args.width, e.args.height);
+			glViewport
+			(
+				0,
+				0,
+				static_cast<GLsizei>(e.args.width),
+				static_cast<GLsizei>(e.args.height)
+			);
 			break;
 		default:
 			break;

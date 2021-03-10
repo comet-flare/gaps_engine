@@ -10,7 +10,7 @@ namespace gaps
 	class Engine final
 	{
 	public:
-		static int32_t Run(std::function<ApplicationLayer* ()> InitCallback);
+		static int32_t Run(const std::function<ApplicationLayer* ()>& InitCallback);
 
 		static float GetElapsedSeconds();
 

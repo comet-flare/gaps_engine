@@ -52,7 +52,7 @@ namespace gaps
 		double yPosition = 0.0;
 		glfwGetCursorPos(pInternalWindow, &xPosition, &yPosition);
 
-		MouseButton mouseButton = static_cast<MouseButton>(button + 1);
+		auto mouseButton = static_cast<MouseButton>(button + 1);
 		if (mouseButton == MouseButton::Right && modifiers & GLFW_MOD_ALT)
 		{
 			mouseButton = MouseButton::Middle;

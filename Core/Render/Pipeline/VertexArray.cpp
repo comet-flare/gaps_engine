@@ -32,7 +32,7 @@ namespace gaps
 		uint32_t count = 0u;
 		for (size_t i = 0; i < vertexLayoutMap.size(); i++)
 		{
-			VertexAttributeId key = static_cast<VertexAttributeId>(i);
+			auto key = static_cast<VertexAttributeId>(i);
 			GLenum type = 0u;
 			uint64_t size = 0ull;
 
@@ -52,7 +52,7 @@ namespace gaps
 				vertexLayoutMap[key].attributeCount,
 				type,
 				vertexLayoutMap[key].bNormalized,
-				totalAttributeCount * size,
+				static_cast<GLsizei>(totalAttributeCount * size),
 				reinterpret_cast<void*>(count * size)
 			);
 
@@ -73,11 +73,11 @@ namespace gaps
 	{
 		if (indexSize)
 		{
-			glDrawElements(GL_TRIANGLES, indexSize, GL_UNSIGNED_INT, 0);
+			glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(indexSize), GL_UNSIGNED_INT, 0);
 		}
 		else
 		{
-			glDrawArrays(GL_TRIANGLES, 0, vertexSize);
+			glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertexSize));
 		}
 	}
 
@@ -104,7 +104,7 @@ namespace gaps
 
 	void VertexArray::SetVertexBufferData(void* pData, uint32_t size, const VertexLayoutMap& vertexLayoutMap)
 	{
-		if (pData != nullptr && size > 0u && vertexLayoutMap.size() > 0u)
+		if (pData != nullptr && size > 0u && !vertexLayoutMap.empty())
 		{
 			pVertexData = pData;
 			vertexSize = size;

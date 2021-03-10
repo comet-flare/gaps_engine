@@ -4,13 +4,15 @@ namespace gaps
 {
 	struct TextureDescriptor final
 	{
+		uint32_t width = 0u;
+		uint32_t height = 0u;
 		bool bGenerateMipmap = true;
 	};
 
 	class Texture final
 	{
 	public:
-		explicit Texture(TextureDescriptor desc = {}) noexcept;
+		explicit Texture(const TextureDescriptor& desc = {}) noexcept;
 		~Texture();
 
 		bool Load(const std::string& filePath);

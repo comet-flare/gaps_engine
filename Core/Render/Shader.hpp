@@ -26,8 +26,8 @@ namespace gaps
 		inline static const std::string DEFAULT_PATH = "Assets/Shaders/";
 
 	private:
-		void CheckCompileErrors(uint32_t shaderId, const std::string& type);
-		void CheckLinkErrors();
+		void CheckCompileErrors(uint32_t shaderId, const std::string& type) const;
+		void CheckLinkErrors() const;
 
 		uint32_t programId = 0u;
 	};

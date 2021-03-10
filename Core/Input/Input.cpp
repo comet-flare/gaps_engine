@@ -49,7 +49,7 @@ namespace gaps
         {
         case EventId::KeyPress:
         {
-            auto pKeyboardEvent = static_cast<KeyboardEvent*>(e.get());
+            auto pKeyboardEvent = dynamic_cast<KeyboardEvent*>(e.get());
             return pKeyboard->HandleKeyPress
             (
                 pKeyboardEvent->args.key,
@@ -58,7 +58,7 @@ namespace gaps
         }
         case EventId::KeyRelease:
         {
-            auto pKeyboardEvent = static_cast<KeyboardEvent*>(e.get());
+            auto pKeyboardEvent = dynamic_cast<KeyboardEvent*>(e.get());
             return pKeyboard->HandleKeyRelease
             (
                 pKeyboardEvent->args.key,
@@ -67,7 +67,7 @@ namespace gaps
         }
         case EventId::MouseButtonPress:
         {
-            auto pMouseEvent = static_cast<MouseEvent*>(e.get());
+            auto pMouseEvent = dynamic_cast<MouseEvent*>(e.get());
             return pMouse->HandleButtonPress
             (
                 pMouseEvent->args.button,
@@ -77,7 +77,7 @@ namespace gaps
         }
         case EventId::MouseButtonRelease:
         {
-            auto pMouseEvent = static_cast<MouseEvent*>(e.get());
+            auto pMouseEvent = dynamic_cast<MouseEvent*>(e.get());
             return pMouse->HandleButtonRelease
             (
                 pMouseEvent->args.button,
@@ -87,7 +87,7 @@ namespace gaps
         }
         case EventId::MouseMotion:
         {
-            auto pMouseEvent = static_cast<MouseEvent*>(e.get());
+            auto pMouseEvent = dynamic_cast<MouseEvent*>(e.get());
             return pMouseEvent->args.bRelativeMotion
                 ? pMouse->HandleRelativeMotion
                 (
@@ -102,7 +102,7 @@ namespace gaps
         }
         case EventId::MouseScroll:
         {
-            auto pMouseEvent = static_cast<MouseEvent*>(e.get());
+            auto pMouseEvent = dynamic_cast<MouseEvent*>(e.get());
             return pMouse->HandleScroll
             (
                 pMouseEvent->args.xScroll,

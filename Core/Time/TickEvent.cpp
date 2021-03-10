@@ -9,9 +9,9 @@ namespace gaps
 	{
 	}
 
-	TickEvent::TickEvent(EventId id) noexcept
+	TickEvent::TickEvent(const EventId id) noexcept
 		:
-		Event{ std::move(id) }
+		Event{ id }
 	{
 	}
 }

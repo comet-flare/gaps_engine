@@ -13,7 +13,7 @@ MOD("Core.Engine");
 
 namespace gaps
 {
-	int32_t Engine::Run(std::function<ApplicationLayer* ()> InitCallback)
+	int32_t Engine::Run(const std::function<ApplicationLayer* ()>& InitCallback)
 	{
 		pEventDispatcher = new EventDispatcher();
 		pWindow = new Window();
@@ -63,7 +63,7 @@ namespace gaps
 
 	float Engine::GetElapsedSeconds()
 	{
-		return glfwGetTime();
+		return static_cast<float>(glfwGetTime());
 	}
 
 	void Engine::Update()
@@ -83,7 +83,7 @@ namespace gaps
 			}
 
 			previousTime = currentTime;
-			const float deltaTime = duration_cast<microseconds>(diff).count() / 1000000.f;
+			const float deltaTime = static_cast<float>(duration_cast<microseconds>(diff).count()) / 1000000.f;
 
 			pApplicationLayer->Update(deltaTime);
 

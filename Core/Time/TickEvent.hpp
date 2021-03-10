@@ -8,7 +8,7 @@ namespace gaps
     {
     public:
         TickEvent() noexcept;
-        TickEvent(EventId id) noexcept;
+        explicit TickEvent(EventId id) noexcept;
 
         struct Args final
         {
