@@ -13,6 +13,7 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <entt/entt.hpp>
 
 #define SAFE_RELEASE(RESOURCE) \
 	if ((RESOURCE) != nullptr) { delete RESOURCE; RESOURCE = nullptr; }

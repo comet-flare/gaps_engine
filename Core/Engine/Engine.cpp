@@ -8,6 +8,7 @@
 #include <Core/Event/InternalEvents.hpp>
 #include <Core/Input/Input.hpp>
 #include <Core/Time/TickEvent.hpp>
+#include <Core/World/Entity.hpp>
 
 MOD("Core.Engine");
 
@@ -18,6 +19,7 @@ namespace gaps
 		pEventDispatcher = new EventDispatcher();
 		pWindow = new Window();
 		pRenderer = new Renderer();
+		pScene = new Scene();
 		pApplicationLayer = InitCallback();
 
 #ifdef _DEBUG
@@ -103,6 +105,7 @@ namespace gaps
 		pWindow->Destroy();
 
 		SAFE_RELEASE(pApplicationLayer);
+		SAFE_RELEASE(pScene);
 		SAFE_RELEASE(pRenderer);
 		SAFE_RELEASE(pWindow);
 		SAFE_RELEASE(pEventDispatcher);

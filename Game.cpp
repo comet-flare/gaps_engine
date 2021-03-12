@@ -7,6 +7,9 @@
 #include <Core/Input/Input.hpp>
 #include <Core/Input/Keyboard/Keyboard.hpp>
 #include <Core/Engine/Engine.hpp>
+#include <Core/Render/Renderer.hpp>
+#include <Core/World/Entity.hpp>
+#include <Core/World/Transform.hpp>
 
 MOD("Game");
 
@@ -42,7 +45,13 @@ void Game::OnDisable()
 
 void Game::OnStart()
 {
+	gaps::Entity cube = gaps::Engine::pScene->CreateEntity("Cube1");
+	auto& transform = cube.GetComponent<gaps::TransformComponent>();
+	transform.location = { 0.5f, 0.5f, 0.0f };
+	transform.scale = { 0.5f, 0.5f, 0.5f };
+
 	pShader->Load("BasicShader.vert", "BasicShader.frag");
+	gaps::Engine::pRenderer->shaders.push_back(pShader);
 
 	float vertices[] =
 	{
@@ -114,13 +123,10 @@ void Game::OnStart()
 
 void Game::OnUpdate(float deltaTime)
 {
-	glm::mat4 transform = glm::mat4(1.0f);
-	transform = glm::translate(transform, glm::vec3(0.5f, 0.5f, 0.0f));
-	transform = glm::rotate(transform, 0.f, glm::vec3(1.0f, 0.0f, 0.0f));
-	transform = glm::rotate(transform, gaps::Engine::GetElapsedSeconds(), glm::vec3(0.0f, 1.0f, 0.0f));
-	transform = glm::rotate(transform, gaps::Engine::GetElapsedSeconds(), glm::vec3(0.0f, 0.0f, 1.0f));
-	transform = glm::scale(transform, glm::vec3(0.5, 0.5, 0.5));
-	pShader->SetUniform("uTransform", transform);
+	auto elapsedSeconds = gaps::Engine::GetElapsedSeconds();
+	gaps::Entity cube = gaps::Engine::pScene->GetEntity("Cube1");
+	auto& transform = cube.GetComponent<gaps::TransformComponent>();
+	transform.rotation = { 0.f, elapsedSeconds, elapsedSeconds };
 }
 
 void Game::OnRender()

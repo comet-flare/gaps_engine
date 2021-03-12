@@ -6,6 +6,7 @@ namespace gaps
 	class Renderer;
 	class ApplicationLayer;
 	class EventDispatcher;
+	class Scene;
 
 	class Engine final
 	{
@@ -18,6 +19,7 @@ namespace gaps
 		inline static Renderer* pRenderer = nullptr;
 		inline static ApplicationLayer* pApplicationLayer = nullptr;
 		inline static EventDispatcher* pEventDispatcher = nullptr;
+		inline static Scene* pScene = nullptr;
 
 	private:
 		static void Update();

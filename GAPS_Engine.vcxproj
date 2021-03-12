@@ -174,6 +174,9 @@
     <ClCompile Include="Core\Window\Window.cpp" />
     <ClCompile Include="Core\Time\TimeUtils.cpp" />
     <ClCompile Include="Core\Window\WindowEvent.cpp" />
+    <ClCompile Include="Core\World\Actor.cpp" />
+    <ClCompile Include="Core\World\Entity.cpp" />
+    <ClCompile Include="Core\World\Scene.cpp" />
     <ClCompile Include="Extern\Include\glad\glad.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="gapspch.cpp">
@@ -207,6 +210,10 @@
     <ClInclude Include="Core\Window\Window.hpp" />
     <ClInclude Include="Core\Time\TimeUtils.hpp" />
     <ClInclude Include="Core\Window\WindowEvent.hpp" />
+    <ClInclude Include="Core\World\Actor.hpp" />
+    <ClInclude Include="Core\World\Entity.hpp" />
+    <ClInclude Include="Core\World\Scene.hpp" />
+    <ClInclude Include="Core\World\Transform.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="gapspch.hpp" />
   </ItemGroup>
