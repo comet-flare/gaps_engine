@@ -4,9 +4,17 @@
 #include <Core/Engine/Engine.hpp>
 #include <Core/Event/EventDispatcher.hpp>
 #include <Core/Input/Input.hpp>
+#include <Core/Window/Window.hpp>
 
 namespace gaps
 {
+    void Mouse::SetCursorEnabled(const bool bEnable)
+    {
+        bEnable
+            ? glfwSetInputMode(Engine::pWindow->pInternal, GLFW_CURSOR, GLFW_CURSOR_NORMAL)
+            : glfwSetInputMode(Engine::pWindow->pInternal, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    }
+
     float Mouse::GetXPosition() const noexcept
     {
         return xPosition;

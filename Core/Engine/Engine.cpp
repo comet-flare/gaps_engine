@@ -9,6 +9,8 @@
 #include <Core/Input/Input.hpp>
 #include <Core/Time/TickEvent.hpp>
 #include <Core/World/Entity.hpp>
+#include <Core/Render/Camera.hpp>
+#include <Core/World/Transform.hpp>
 
 MOD("Core.Engine");
 
@@ -47,10 +49,17 @@ namespace gaps
 		InternalEvents::Register(pWindow->pInternal);
 		Input::RegisterDevices();
 
+		Entity camera = pScene->CreateEntity("DefaultCamera");
+		auto& cameraComponent = camera.AddComponent<CameraComponent>();
+		auto& cameraTransform = camera.GetComponent<TransformComponent>();
+		cameraTransform.location = { 0.f, 0.f, 5.f };
+		Camera::UpdateVectors(cameraComponent);
+
 		pRenderer->Setup();
 		pApplicationLayer->Start();
 
-		while (!pWindow->ShouldClose())
+		bRunning = true;
+		while (!pWindow->ShouldClose() && bRunning)
 		{
 			Update();
 
@@ -61,6 +70,11 @@ namespace gaps
 
 		Release();
 		return EXIT_SUCCESS;
+	}
+
+	void Engine::ShutDown()
+	{
+		bRunning = false;
 	}
 
 	float Engine::GetElapsedSeconds()

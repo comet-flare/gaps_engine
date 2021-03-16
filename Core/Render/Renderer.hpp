@@ -6,6 +6,7 @@
 namespace gaps
 {
 	class RenderSystem;
+	class CameraSystem;
 
 	struct RendererDescriptor final
 	{
@@ -31,7 +32,8 @@ namespace gaps
 		bool HandleWindow(const WindowEvent& e);
 
 		RendererDescriptor desc;
-		RenderSystem* pSystem = nullptr;
+		RenderSystem* pRenderSystem = nullptr;
+		CameraSystem* pCameraSystem = nullptr;
 	};
 
 	class RenderSystem : public Actor

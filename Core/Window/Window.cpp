@@ -82,6 +82,11 @@ namespace gaps
 		return desc;
 	}
 
+	float Window::GetAspectRatio() const
+	{
+		return static_cast<float>(desc.width) / static_cast<float>(desc.height);
+	}
+
 	void Window::SubscribeEvent(const WindowEvent& e)
 	{
 		std::lock_guard<std::mutex> lock{ windowEventQueue.mutex };

@@ -14,6 +14,7 @@ namespace gaps
 		void DestroyEntity(Entity entity);
 
 		const Registry& GetRegistry() const noexcept;
+		Entity GetPrimaryCamera();
 
 	private:
 		Registry registry;

@@ -13,7 +13,9 @@ namespace gaps
 	class VertexArray;
 }
 
-class Game final : public gaps::ApplicationLayer, public gaps::EventHandler
+using namespace gaps;
+
+class Game final : public ApplicationLayer, public EventHandler
 {
 public:
 	Game();
@@ -23,16 +25,10 @@ private:
 	void OnEnable() override;
 	void OnDisable() override;
 	void OnStart() override;
-	void OnUpdate(float deltaTime) override;
 	void OnRender() override;
 	void OnRelease() override;
 
-	bool Tick(gaps::TickEvent e);
-	bool HandleKeyboard(gaps::KeyboardEvent e);
-	bool HandleMouse(gaps::MouseEvent e);
-
-	gaps::Texture* pBrickTexture = nullptr;
-	gaps::Texture* pGapsTexture = nullptr;
-	gaps::Shader* pShader = nullptr;
-	gaps::VertexArray* pVertexArray = nullptr;
+	Texture* pBrickTexture = nullptr;
+	Shader* pShader = nullptr;
+	VertexArray* pVertexArray = nullptr;
 };

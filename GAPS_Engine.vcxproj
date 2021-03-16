@@ -166,6 +166,7 @@
     <ClCompile Include="Core\Input\Keyboard\KeyboardEvent.cpp" />
     <ClCompile Include="Core\Input\Mouse\Mouse.cpp" />
     <ClCompile Include="Core\Input\Mouse\MouseEvent.cpp" />
+    <ClCompile Include="Core\Render\Camera.cpp" />
     <ClCompile Include="Core\Render\Pipeline\VertexArray.cpp" />
     <ClCompile Include="Core\Render\Renderer.cpp" />
     <ClCompile Include="Core\Render\Shader.cpp" />
@@ -201,6 +202,7 @@
     <ClInclude Include="Core\Input\Mouse\Mouse.hpp" />
     <ClInclude Include="Core\Input\Mouse\MouseButton.hpp" />
     <ClInclude Include="Core\Input\Mouse\MouseEvent.hpp" />
+    <ClInclude Include="Core\Render\Camera.hpp" />
     <ClInclude Include="Core\Render\Pipeline\VertexArray.hpp" />
     <ClInclude Include="Core\Render\Pipeline\VertexFormat.hpp" />
     <ClInclude Include="Core\Render\Renderer.hpp" />

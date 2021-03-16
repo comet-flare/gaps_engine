@@ -12,6 +12,7 @@ namespace gaps
 	{
 	public:
 		static int32_t Run(const std::function<ApplicationLayer* ()>& InitCallback);
+		static void ShutDown();
 
 		static float GetElapsedSeconds();
 
@@ -26,5 +27,6 @@ namespace gaps
 		static void Release();
 
 		inline static std::chrono::steady_clock::time_point previousTime;
+		inline static bool bRunning = false;
 	};
 }

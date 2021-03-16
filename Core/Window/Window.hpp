@@ -24,6 +24,7 @@ namespace gaps
 		void SwapBuffers();
 
 		const WindowDescriptor& GetDescriptor() const noexcept;
+		float GetAspectRatio() const;
 
 	private:
 		void SubscribeEvent(const WindowEvent& e);
@@ -36,5 +37,6 @@ namespace gaps
 
 		friend class Engine;
 		friend class InternalEvents;
+		friend class Mouse;
 	};
 }

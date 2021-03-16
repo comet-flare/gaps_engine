@@ -10,26 +10,125 @@
 #include <Core/Render/Renderer.hpp>
 #include <Core/World/Entity.hpp>
 #include <Core/World/Transform.hpp>
+#include <Core/Render/Camera.hpp>
+#include <Core/Input/Mouse/Mouse.hpp>
+#include <Core/Window/Window.hpp>
 
 MOD("Game");
 
 Game::Game()
 	:
-	pBrickTexture{ new gaps::Texture() },
-	pGapsTexture{ new gaps::Texture() },
-	pShader{ new gaps::Shader() },
-	pVertexArray{ new gaps::VertexArray() }
+	pBrickTexture{ new Texture() },
+	pShader{ new Shader() },
+	pVertexArray{ new VertexArray() }
 {
-	//TickHandler = BIND_EVENT(Game::Tick);
-	//KeyboardHandler = BIND_EVENT(Game::HandleKeyboard);
-	//MouseHandler = BIND_EVENT(Game::HandleMouse);
+	TickHandler = [](const TickEvent& e) -> bool
+	{
+		// Update the cube's rotation
+		{
+			auto elapsedSeconds = Engine::GetElapsedSeconds();
+			Entity cube = Engine::pScene->GetEntity("Cube1");
+			auto& transform = cube.GetComponent<TransformComponent>();
+			transform.rotation = { 0.f, elapsedSeconds, elapsedSeconds };
+		}
+
+		// Handle camera movement
+		{
+			auto camera = Engine::pScene->GetPrimaryCamera();
+
+			if (Input::pKeyboard->IsKeyDown(KeyCode::W))
+				Camera::MoveForward(camera, e.args.deltaTime);
+
+			if (Input::pKeyboard->IsKeyDown(KeyCode::S))
+				Camera::MoveBackward(camera, e.args.deltaTime);
+
+			if (Input::pKeyboard->IsKeyDown(KeyCode::A))
+				Camera::MoveLeft(camera, e.args.deltaTime);
+
+			if (Input::pKeyboard->IsKeyDown(KeyCode::D))
+				Camera::MoveRight(camera, e.args.deltaTime);
+
+			if (Input::pKeyboard->IsKeyDown(KeyCode::Z))
+				Camera::MoveUp(camera, e.args.deltaTime);
+
+			if (Input::pKeyboard->IsKeyDown(KeyCode::X))
+				Camera::MoveDown(camera, e.args.deltaTime);
+		}
+
+		return false;
+	};
+
+	MouseHandler = [](const MouseEvent& e) -> bool
+	{
+		static bool bFirstTime = true;
+
+		switch (e.GetId())
+		{
+		case EventId::MouseScroll:
+		{
+			// Handle camera zoom in and zoom out
+			auto camera = Engine::pScene->GetPrimaryCamera();
+			Camera::Zoom(camera, e.args.yScroll);
+
+			break;
+		}
+		case EventId::MouseMotion:
+		{
+			// Handle camera look around
+			static float lastX = Engine::pWindow->GetDescriptor().width / 2.f;
+			static float lastY = Engine::pWindow->GetDescriptor().height / 2.f;
+
+			if (bFirstTime)
+			{
+				lastX = e.args.xPosition;
+				lastY = e.args.yPosition;
+			}
+
+			float xOffset = e.args.xPosition - lastX;
+			float yOffset = lastY - e.args.yPosition;
+
+			lastX = e.args.xPosition;
+			lastY = e.args.yPosition;
+
+			auto camera = Engine::pScene->GetPrimaryCamera();
+			Camera::LookAround(camera, xOffset, yOffset);
+
+			bFirstTime = false;
+
+			break;
+		}
+		case EventId::MouseButtonPress:
+		{
+			if (e.args.button == MouseButton::Left)
+			{
+				// Enable/Disable cursor on scene click
+				static bool bToggle = false;
+				bToggle = !bToggle;
+				Input::pMouse->SetCursorEnabled(!bToggle);
+				bFirstTime = !bFirstTime;
+			}
+
+			break;
+		}
+		default: break;
+		}
+
+		return false;
+	};
+
+	KeyboardHandler = [](const KeyboardEvent& e) -> bool
+	{
+		if (e.GetId() == EventId::KeyPress && e.args.key == KeyCode::Escape)
+			Engine::ShutDown();
+
+		return false;
+	};
 }
 
 Game::~Game()
 {
 	SAFE_RELEASE(pVertexArray);
 	SAFE_RELEASE(pShader);
-	SAFE_RELEASE(pGapsTexture);
 	SAFE_RELEASE(pBrickTexture);
 }
 
@@ -45,13 +144,13 @@ void Game::OnDisable()
 
 void Game::OnStart()
 {
-	gaps::Entity cube = gaps::Engine::pScene->CreateEntity("Cube1");
-	auto& transform = cube.GetComponent<gaps::TransformComponent>();
+	Entity cube = Engine::pScene->CreateEntity("Cube1");
+	auto& transform = cube.GetComponent<TransformComponent>();
 	transform.location = { 0.5f, 0.5f, 0.0f };
 	transform.scale = { 0.5f, 0.5f, 0.5f };
 
 	pShader->Load("BasicShader.vert", "BasicShader.frag");
-	gaps::Engine::pRenderer->shaders.push_back(pShader);
+	Engine::pRenderer->shaders.push_back(pShader);
 
 	float vertices[] =
 	{
@@ -99,40 +198,28 @@ void Game::OnStart()
 		-0.5f,  0.5f, -0.5f,    1.f, 1.f, 1.f, 1.f,    0.0f, 1.0f
 	};
 
-	gaps::VertexLayoutMap vertexLayoutMap =
+	VertexLayoutMap vertexLayoutMap =
 	{
-		{ gaps::VertexAttributeId::Position, { 3, gaps::VertexAttributeType::Float } },
-		{ gaps::VertexAttributeId::Color, { 4, gaps::VertexAttributeType::Float } },
-		{ gaps::VertexAttributeId::TexCoord, { 2, gaps::VertexAttributeType::Float } }
+		{ VertexAttributeId::Position, { 3, VertexAttributeType::Float } },
+		{ VertexAttributeId::Color, { 4, VertexAttributeType::Float } },
+		{ VertexAttributeId::TexCoord, { 2, VertexAttributeType::Float } }
 	};
 
 	pVertexArray->SetVertexBufferData(FROM_DATA(vertices), vertexLayoutMap);
 	pVertexArray->Submit();
 
 	pBrickTexture->Load("brick.png");
-	pGapsTexture->Load("gaps.png");
 
 	pShader->Use();
-	pShader->SetUniform("uTextureLerpRatio", 0.4f);
 	pShader->SetUniform("uColorTint", 1.f, 1.f, 1.f, 1.f);
-	pShader->SetUniform("uTexture0", 0);
-	pShader->SetUniform("uTexture1", 1);
+	pShader->SetUniform("uTexture", 0);
 
 	DEBUG_INFO("Demo Game Started Successfully!");
-}
-
-void Game::OnUpdate(float deltaTime)
-{
-	auto elapsedSeconds = gaps::Engine::GetElapsedSeconds();
-	gaps::Entity cube = gaps::Engine::pScene->GetEntity("Cube1");
-	auto& transform = cube.GetComponent<gaps::TransformComponent>();
-	transform.rotation = { 0.f, elapsedSeconds, elapsedSeconds };
 }
 
 void Game::OnRender()
 {
 	pBrickTexture->Bind(0);
-	pGapsTexture->Bind(1);
 
 	pShader->Use();
 	pVertexArray->Bind();
@@ -142,49 +229,4 @@ void Game::OnRender()
 void Game::OnRelease()
 {
 	pVertexArray->Release();
-}
-
-bool Game::Tick(gaps::TickEvent e)
-{
-	std::cout << "DeltaTime: " << e.args.deltaTime
-		<< "; ElapsedSeconds: " << gaps::Engine::GetElapsedSeconds() << "\n";
-
-	return false;
-}
-
-bool Game::HandleKeyboard(gaps::KeyboardEvent e)
-{
-	std::cout << gaps::Input::pKeyboard->KeyToString(e.args.key);
-
-	return false;
-}
-
-bool Game::HandleMouse(gaps::MouseEvent e)
-{
-	switch (e.GetId())
-	{
-	case gaps::EventId::MouseButtonPress:
-	{
-		std::cout << "Button DOWN: " << (int)e.args.button << "\n";
-		break;
-	}
-	case gaps::EventId::MouseButtonRelease:
-	{
-		std::cout << "Button UP: " << (int)e.args.button << "\n";
-		break;
-	}
-	case gaps::EventId::MouseMotion:
-	{
-		std::cout << "x_position: " << e.args.xPosition << "; y_position: " << e.args.yPosition << "\n";
-		break;
-	}
-	case gaps::EventId::MouseScroll:
-	{
-		std::cout << "x_scroll: " << e.args.xScroll << "; y_scroll: " << e.args.yScroll << "\n";
-		break;
-	}
-	default: break;
-	}
-
-	return false;
 }

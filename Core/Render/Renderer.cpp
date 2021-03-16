@@ -5,13 +5,15 @@
 #include <Core/World/Transform.hpp>
 #include <Core/Render/Shader.hpp>
 #include <Core/Time/TickEvent.hpp>
+#include <Core/Render/Camera.hpp>
 
 namespace gaps
 {
 	Renderer::Renderer(const RendererDescriptor& desc) noexcept
 		:
 		desc{ desc },
-		pSystem{ new RenderSystem(this) }
+		pRenderSystem{ new RenderSystem(this) },
+		pCameraSystem{ new CameraSystem() }
 	{
 		WindowHandler = BIND_EVENT(Renderer::HandleWindow);
 		StartListening();
@@ -20,13 +22,15 @@ namespace gaps
 	Renderer::~Renderer()
 	{
 		StopListening();
-		SAFE_RELEASE(pSystem);
+		SAFE_RELEASE(pCameraSystem);
+		SAFE_RELEASE(pRenderSystem);
 	}
 
 	void Renderer::Setup()
 	{
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_DEPTH_TEST);
 	}
 
 	void Renderer::ClearScreen()
@@ -71,7 +75,8 @@ namespace gaps
 	{
 		TickHandler = [pRenderer](const TickEvent& e) -> bool
 		{
-			auto modelView = Engine::pScene->GetRegistry().view<const TransformComponent>();
+			auto modelView = Engine::pScene->GetRegistry().view<const TransformComponent>(entt::exclude<CameraComponent>);
+
 			for (auto entity : modelView)
 			{
 				auto& transform = modelView.get<const TransformComponent>(entity);
@@ -85,7 +90,9 @@ namespace gaps
 
 				for (const auto& pShader : pRenderer->shaders)
 				{
-					pShader->SetUniform("uTransform", model);
+					pShader->SetUniform("uProjection", Camera::projection);
+					pShader->SetUniform("uView", Camera::view);
+					pShader->SetUniform("uModel", model);
 				}
 			}
 

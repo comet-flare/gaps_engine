@@ -1,6 +1,7 @@
 #include <gapspch.hpp>
 #include <Core/World/Entity.hpp>
 #include <Core/World/Transform.hpp>
+#include <Core/Render/Camera.hpp>
 
 namespace gaps
 {
@@ -29,5 +30,20 @@ namespace gaps
     const Scene::Registry& Scene::GetRegistry() const noexcept
     {
         return registry;
+    }
+
+    Entity Scene::GetPrimaryCamera()
+    {
+        auto view = registry.view<CameraComponent>();
+        for (auto entity : view)
+        {
+            const auto& camera = view.get<CameraComponent>(entity);
+            if (camera.primary)
+            {
+                return Entity{ entity, this };
+            }
+        }
+
+        return {};
     }
 }

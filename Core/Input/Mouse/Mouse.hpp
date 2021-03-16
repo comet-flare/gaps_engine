@@ -7,6 +7,8 @@ namespace gaps
 	class Mouse final
 	{
 	public:
+		void SetCursorEnabled(bool bEnable);
+
 		float GetXPosition() const noexcept;
 		float GetYPosition() const noexcept;
 		bool IsButtonDown(MouseButton button) const;
